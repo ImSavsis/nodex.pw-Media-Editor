@@ -1,0 +1,54 @@
+{
+  "name": "nodex-media-editor",
+  "version": "3.2.5",
+  "description": "nodex.pw Media Editor — professional audio editing suite",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3"
+  },
+  "devDependencies": {
+    "electron": "^32.2.7",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "pw.nodex.media-editor",
+    "productName": "nodex.pw Media Editor",
+    "copyright": "© 2025 Nodex.pw",
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "assets/**/*"],
+    "extraResources": [
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.exe",
+        "to": "ffmpeg.exe"
+      }
+    ],
+    "compression": "maximum",
+    "fileAssociations": [
+      {
+        "ext": "nodexproj",
+        "name": "nodex.pw Media Project",
+        "description": "nodex.pw Media Editor Project",
+        "icon": "assets/icon.ico",
+        "role": "Editor"
+      }
+    ],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-${version}-setup.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "nodex.pw Media Editor"
+    }
+  }
+}
